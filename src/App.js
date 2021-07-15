@@ -9,7 +9,7 @@ function App() {
       <Router>
         <Container>
           <Link to='/'>Home</Link>
-          <Link to='/post'>Posts</Link>
+          <Link to='/1'>Posts</Link>
         </Container>
         <Switch>
           <Route exact path='/' component={Home} />
