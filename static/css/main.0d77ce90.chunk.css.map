@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/style.css"],"names":[],"mappings":"AAAA,KACE,QAAS,CAET,qBACF,CAEA,OAJE,SAMF,CACA,oBACE,SACF","file":"main.0d77ce90.chunk.css","sourcesContent":["body {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}\n\n* {\n  padding: 0;\n}\n*::-webkit-scrollbar {\n  width: 1px;\n}\n"]}
