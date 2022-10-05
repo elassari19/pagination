@@ -1,53 +1,44 @@
+/* eslint-disable eqeqeq */
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom'
+import Dots from './Dots';
+import LinkRoute from './LinkRoute';
 
 const Pagination = ({state, handelPage}) => {
 
   let {page} = state;
 
-  let left ,midel, right;
+  let midel = [...Array(Number(page)<=2||Number(page)>=9?2:3)].map((_,idx) => (
+      
+    Number(page) == 1
+    ? <LinkRoute handelPage={handelPage} pageNumber={Number(page) + 1 + idx} page={page} /> 
+    
+    :Number(page) == 2
+    ? <LinkRoute handelPage={handelPage} pageNumber={Number(page) + idx}     page={page} /> 
+      
+    :Number(page) == 10
+    ? <LinkRoute handelPage={handelPage} pageNumber={Number(page) + idx - 2} page={page} />  
+    
+    :Number(page) == 9
+    ? <LinkRoute handelPage={handelPage} pageNumber={Number(page) + idx - 1} page={page} />
 
+    : <LinkRoute handelPage={handelPage} pageNumber={Number(page) + idx - 1} page={page} />
 
-  left = [...Array(Number(page)<=2?3:1)].map((_,idx) => (
-      <Link to={'/'+(idx+1)}
-        onClick={()=>handelPage(idx + 1)}
-        key={idx + 1}
-        className={Number(page) === idx + 1 ? 'disable' : ''}
-      >
-        {idx + 1}
-      </Link>
-    ))
-
-    right = [...Array(Number(page)>=9?3:1)].map((_,idx) => {
-      let num = Number(page)>=9?8:10;
-      return <Link to={'/'+(idx+ num)}
-        onClick={()=>handelPage(idx + num)}
-        key={idx + num}
-        className={Number(page) === idx + num ? 'disable' : ''}
-      >
-        {idx + num}
-      </Link>
-    })
-
-    midel = [...Array(Number(page)<=2||Number(page)>=9?1:3)].map((_,idx) => (
-      <Link to={'/'+(idx + Number(page) - 1)}
-        onClick={()=>handelPage(idx + Number(page) - 1)}
-        key={idx + Number(page) - 1}
-        className={Number(page) === idx + Number(page) - 1 ? 'disable' : ''}
-      >
-        {idx + Number(page) - 1}
-      </Link>
     ))
 
 
   return (
     <Paginations>
-      {left}
-      {Number(page) >= 3 && Number(page) <= 8 && <>...</>}
-      {Number(page) >= 3 && Number(page) <= 8 && midel}
-      ...
-      {right}
+
+      <LinkRoute handelPage={handelPage} pageNumber={1} page={page} />
+
+      <Dots state={state} handelPage={handelPage}>
+        { midel}
+      </Dots>
+
+      <LinkRoute handelPage={handelPage} pageNumber={10} page={page} />
+
     </Paginations>
   )
 }
@@ -56,6 +47,8 @@ export default Pagination
 
 const Paginations = styled.div`
   padding: 2rem 4rem 0;
+  display:flex;
+  flex-direction:row;
   .disabled{
     cursor: not-allowed;
     background: #3f3f3f;
@@ -73,6 +66,7 @@ const Paginations = styled.div`
     border: 1px solid gray;
     padding: .3rem;
     text-align: center;
+    height:20px;
     :active{
       background: blue;
       color: white;

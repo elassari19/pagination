@@ -3,3 +3,14 @@ body{
   padding: 0;
   box-sizing: border-box;
 }
+
+*::-webkit-scrollbar{
+  width: 1px;
+}
+
+.left {
+  display: absolute;
+  bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
